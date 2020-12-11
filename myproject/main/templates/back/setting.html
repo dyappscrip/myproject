@@ -1,0 +1,130 @@
+{% extends 'back/master.html' %}
+{% load static %}
+
+{% block headblock %}
+<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+{% endblock %}
+
+{% block mainblock %}
+
+<!-- Datatables Header -->
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-table"></i>Setting<br><small>Settings for site</small>
+        </h1>
+    </div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>Tables</li>
+    <li><a href="#">Setting</a></li>
+</ul>
+<!-- END Datatables Header -->
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- Basic Form Elements Block -->
+        <div class="block">
+            <!-- Basic Form Elements Title -->
+            <div class="block-title">
+                <div class="block-options pull-right">
+                    <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="Toggles .form-bordered class">No Borders</a>
+                </div>
+                <h2><strong>Basic Form</strong> Elements</h2>
+            </div>
+            <!-- END Form Elements Title -->
+
+            <!-- Basic Form Elements Content -->
+            <form action="{% url 'site_setting' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                {% csrf_token %}
+                <div class="form-group">
+                    
+                    <div class="col-md-6">
+                        <input type="text" id="name" name="name" value="{{site.name}}" class="form-control" placeholder="Name">
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <input type="text" id="tell" name="tell" value="{{site.tell}}" class="form-control" placeholder="Tell">
+                    </div>
+                    
+                </div>
+        
+                <div class="form-group">
+                    
+                    <div class="col-md-4">
+                        <input type="text" id="fb" name="fb" value="{{site.fb}}" class="form-control" placeholder="FB">
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <input type="text" id="tw" name="tw" value="{{site.tw}}" class="form-control" placeholder="TW">
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <input type="text" id="yt" name="yt" value="{{site.yt}}" class="form-control" placeholder="YT">
+                    </div>
+                    
+                </div>
+        
+                <div class="form-group">
+                    
+                    <div class="col-md-12">
+                        <input type="text" id="link" name="link" value="{{site.link}}" class="form-control" placeholder="Link">
+                    </div>
+                    
+                    
+                </div>
+        
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <textarea id="about" name="about" class="form-control" placeholder="News Body Text" >{{site.about}}</textarea>
+                    </div>
+                </div>
+                <script>
+                    CKEDITOR.replace( 'about' );
+                </script>
+                
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <input type="file" id="logo_header" name="logo_header" class="form-control" placeholder="News Body Text" ></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{{site.picurl}}" width=150 height=100% />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <input type="file" id="logo_footer" name="logo_footer" class="form-control" placeholder="News Body Text" ></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{{site.picurl2}}" width=150 height=100% />
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                    </div>
+                </div>
+
+
+            </form>
+            <!-- END Basic Form Elements Content -->
+        </div>
+        <!-- END Basic Form Elements Block -->
+    </div>
+   
+</div>
+
+
+{% endblock %}
+
+{% block footerblock %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function(){ TablesDatatables.init(); });</script>
+
+
+{% endblock %}
