@@ -97,7 +97,6 @@ def site_setting(request):
         error = "Access Denied"
         return render(request, 'back/error.html',{'error':error})
 
-
     if request.method == 'POST':
         name = request.POST.get('name')
         tell = request.POST.get('tell')
