@@ -189,6 +189,8 @@
                                     <span class="sidebar-header-title">News Section</span>
                                 </li>
 
+                                {% if request.user|has_group:"masteruser" %}
+
                                 <li>
                                     <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Category</span></a>
                                     <ul>
@@ -211,6 +213,7 @@
                                         </li>
                                     </ul>
                                 </li>
+                                {% endif %}
                                 <li>
                                     <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">News</span></a>
                                     <ul>
@@ -222,10 +225,14 @@
                                         </li>
                                     </ul>
                                 </li>
+                                
+                                {% if request.user|has_group:"masteruser" %}
+
                                 <li>
                                     <a href="{% url 'trending_add' %}" class=" "><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Trending</span></a>
                                 </li>
 
+                                {% endif %}
                             </ul>
                             <!-- END Sidebar Navigation -->
                         </div>

@@ -17,10 +17,10 @@ def home(request):
     site = Main.objects.get(pk=1)
     cat = Cat.objects.all()
     subcat = SubCat.objects.all()
-    news = News.objects.all().order_by('-pk')
-    lastnews = News.objects.all().order_by('-pk')[:3]
-    popnews = News.objects.all().order_by('-show')
-    popnews2 = News.objects.all().order_by('-show')[:3]
+    news = News.objects.filter(act=1).order_by('-pk')
+    lastnews = News.objects.filter(act=1).order_by('-pk')[:3]
+    popnews = News.objects.filter(act=1).order_by('-show')
+    popnews2 = News.objects.filter(act=1).order_by('-show')[:3]
     trending = Trending.objects.all()[:5]
 
     random_object = Trending.objects.all()[randint(0, len(trending) - 1)]

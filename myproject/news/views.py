@@ -93,7 +93,7 @@ def news_add(request):
                     newsname = SubCat.objects.get(pk=newscatid).name
                     ocatid = SubCat.objects.get(pk=newscatid).catid
 
-                    b = News(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, date=today, time=current_time, picname=filename, picurl=url, writer="-", catname=newscat, catid=newscatid, show=0, ocatid=ocatid, tag=tag)
+                    b = News(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, date=today, time=current_time, picname=filename, picurl=url, writer=request.user, catname=newscat, catid=newscatid, show=0, ocatid=ocatid, tag=tag)
                     b.save()
 
                     count = len(News.objects.filter(ocatid=ocatid))
@@ -210,10 +210,11 @@ def news_edit(request,pk):
                     b.body_txt = newstxt
                     b.filename = filename
                     b.picurl = url
-                    b.writer = '-'
+                    b.writer = request.user
                     b.tag = newstag
                     b.catname = newscat 
                     b.catid = newscatid
+                    b.act = 1
                     b.save()
                     return redirect('news_list')
                 
@@ -249,3 +250,20 @@ def news_edit(request,pk):
 
     news = News.objects.get(pk=pk)
     return render(request, 'back/news_edit.html',{'pk':pk, 'news':news, 'cat':cat})
+
+def news_publish(request,pk):
+
+    #login check start
+    if not request.user.is_authenticated:
+        return redirect('mylogin')
+    #login check end
+    
+    news = News.objects.get(pk=pk) 
+    if news.act == 0 :
+        news.act = 1
+    elif news.act == 1 :
+        news.act = 0
+    news.save()
+    
+    return redirect('news_list')
+
