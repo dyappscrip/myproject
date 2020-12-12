@@ -10,7 +10,9 @@ from trending.models import Trending
 import random
 from random import randint
 from django.contrib.auth.models import User, Group, Permission
-
+from rest_framework import viewsets
+from .serializer import NewsSerializer
+from django.http import JsonResponse
 # Create your views here.
 
 def home(request):
@@ -312,3 +314,12 @@ def myregister(request):
             b.save()
             
     return render(request, 'front/login.html')
+
+class NewsViewSet(viewsets.ModelViewSet):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+def show_data(request):
+    news_count = News.objects.filter(act=1).count()
+    data = {'news_count':news_count}
+    return JsonResponse(data)
