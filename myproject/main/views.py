@@ -11,7 +11,7 @@ import random
 from random import randint
 from django.contrib.auth.models import User, Group, Permission
 from rest_framework import viewsets
-from .serializer import NewsSerializer
+from .serializer import NewsSerializer,CatSerializer
 from django.http import JsonResponse
 # Create your views here.
 
@@ -318,6 +318,11 @@ def myregister(request):
 class NewsViewSet(viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
+
+class CatViewSet(viewsets.ModelViewSet):
+    queryset = Cat.objects.all()
+    serializer_class = CatSerializer
+
 
 def show_data(request):
     news_count = News.objects.filter(act=1).count()

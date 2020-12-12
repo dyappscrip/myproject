@@ -24,6 +24,7 @@ from main import views
 
 router = routers.DefaultRouter()
 router.register(r'mynews',views.NewsViewSet)
+router.register(r'mycats',views.CatViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
